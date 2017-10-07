@@ -1,5 +1,11 @@
 # Learning to Program with Python!!
 
+## Update Log
+
+### 2017.10.7
+
+加入Dijkstra算法和Floyd算法的python实现并测试通过
+
 ## Contents
 
 Title|Digest|Update Day|Update Record

@@ -87,3 +87,75 @@ class Graph:
         queue = []
         for i in range(self.nodenum):
             DFS(self, i, queue)
+
+    def Dijkstra(self, x):
+        # dijkstra
+        def find_nearest_node(self, dist, checked):
+            node_nearest = -1
+            dist_min = 1000
+            for node in range(self.nodenum):
+                if node not in checked and dist[node] < dist_min:
+                    dist_min = dist[node]
+                    node_nearest = node
+            return [node_nearest, dist_min]
+
+        def get_dist(self, node):
+            dist = [0] * self.nodenum
+            for i in range(self.nodenum):
+                dist[i] = self.map[node][i]
+            return dist
+
+        paths = [x] * self.nodenum
+        S = [x]
+        S_dist = get_dist(self, S[len(S) - 1])
+        while len(S) != self.get_nodenum():
+            [nn, dm] = find_nearest_node(self, S_dist, S)
+            S.append(nn)
+            nn_dist = get_dist(self, nn)
+            for node in range(self.nodenum):
+                if node not in S:
+                    if S_dist[node] > nn_dist[node] + dm:
+                        S_dist[node] = nn_dist[node] + dm
+                        paths[node] = nn
+
+        return [S_dist, paths]
+
+    def d_find_shortest(self, x, y):
+        [dist, paths] = self.Dijkstra(x)
+        node = y
+        path = []
+        while node != x:
+            path.append(node)
+            node = paths[node]
+        path.append(x)
+        path.reverse()
+        return [path, dist[y]]
+
+    def Floyd(self):
+        D = [[0 for i in range(self.nodenum)] for i in range(self.nodenum)]
+        P = [[0 for i in range(self.nodenum)] for i in range(self.nodenum)]
+        for i in range(self.nodenum):
+            for j in range(self.nodenum):
+                D[i][j] = self.map[i][j]
+                if D[i][j] > 0:
+                    P[i][j] = i
+
+        for index in range(self.nodenum):
+            for i in range(self.nodenum):
+                for j in range(self.nodenum):
+                    if D[i][j] > D[i][index] + D[index][j]:
+                        D[i][j] = D[i][index] + D[index][j]
+                        P[i][j] = index
+
+        return [D, P]
+
+    def F_find_shortest(self, x, y):
+        [D, P] = self.Floyd()
+        dist = D[x][y]
+        node = y
+        path = []
+        while node != x:
+            path.append(node)
+            node = P[x][node]
+        path.reverse()
+        return [path, dist]
