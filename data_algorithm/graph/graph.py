@@ -149,7 +149,7 @@ class Graph:
 
         return [D, P]
 
-    def F_find_shortest(self, x, y):
+    def f_find_shortest(self, x, y):
         [D, P] = self.Floyd()
         dist = D[x][y]
         node = y

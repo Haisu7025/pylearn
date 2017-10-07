@@ -6,6 +6,8 @@
 
 加入Dijkstra算法和Floyd算法的python实现并测试通过
 
+完成3人3狼渡河问题
+
 ## Contents
 
 Title|Digest|Update Day|Update Record
