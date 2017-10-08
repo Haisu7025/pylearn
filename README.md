@@ -24,6 +24,9 @@ scrapy_project|Learn to use scrapy to spider some datas|2017-10-8|add frames
 
 
 ## Reference
-[菜鸟教程](http://www.runoob.com/python/python-tutorial.html) http://www.runoob.com/python/python-tutorial.html
+[菜鸟教程](http://www.runoob.com/python/python-tutorial.html) `http://www.runoob.com/python/python-tutorial.html`
 
-[图的实现](http://123.206.254.76/index.php/2017/10/07/pylearn_graph1/) http://123.206.254.76/index.php/2017/10/07/pylearn_graph1/
+[图的实现](http://123.206.254.76/index.php/2017/10/07/pylearn_graph1/) `http://123.206.254.76/index.php/2017/10/07/pylearn_graph1/`
+
+[scrapy基本教程](http://python.jobbole.com/86584/)
+`http://python.jobbole.com/86584/`
