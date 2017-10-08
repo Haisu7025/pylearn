@@ -2,6 +2,10 @@
 
 ## Update Log
 
+### 2017.10.8
+
+加入scrapy爬虫的初步示例程序
+
 ### 2017.10.7
 
 加入Dijkstra算法和Floyd算法的python实现并测试通过
@@ -15,6 +19,7 @@ Title|Digest|Update Day|Update Record
 data_algorithm/graph|Learn to implement the graph structure with python|2017-10-06|add some simple methods and a graph class using matrix
 mail|Learn to use SMTP server to send mails with python|2017-9-15|add simple testfile
 tcp|Learn to implement TCP client and server and communicate datas|2017-9-16|add client and server
+scrapy_project|Learn to use scrapy to spider some datas|2017-10-8|add frames
 ……|
 
 
