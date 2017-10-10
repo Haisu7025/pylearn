@@ -3,6 +3,7 @@ import re
 import scrapy
 from scrapy.http import Request
 from scrapy.http import FormRequest
+from scrapy.selector import Selector
 from TULearn.items import TulearnItem
 
 
@@ -22,6 +23,7 @@ class HWSpider(scrapy.Spider):
         return [Request("https://learn.tsinghua.edu.cn", meta={'cookiejar': 1}, callback=self.post_login)]
 
     def post_login(self, response):
+        print Selector(response)
         formdate = {
             'userid': "yuhs15",
             'userpass': "YyHhSs971027@",
@@ -36,4 +38,27 @@ class HWSpider(scrapy.Spider):
         yield Request(lnk, self.parse)
 
     def parse(self, response):
+        print "index:"
+        problem = Selector(response)
+        print problem
+        print "======selector over======"
+        print response.text
+        yield Request("http://learn.tsinghua.edu.cn/MultiLanguage/lesson/student/MyCourse.jsp?language=cn", self.getClass)
+
+    def getClass(self, response):
+        print "classes:"
+        problem = Selector(response)
+        print problem
+        print "======selector over======"
+        for sel in response.xpath('//*[@id="info_1"]/tr[3]/td[1]/a'):
+            hz = re.search('href="(.*)[0-9]"', sel.extract()).group(1)
+            course_id = re.search('[0-9][0-9][0-9][0-9][0-9]', hz).group()
+            class_link = "http://learn.tsinghua.edu.cn" + hz
+            yield Request(class_link, self.getClassDetails, meta={'course_id': course_id})
+            print course_id
+
+    def getClassDetails(self, response):
+        course_id = response.meta['course_id']
+        Request("http://learn.tsinghua.edu.cn/MultiLanguage/public/bbs/getnoteid_student.jsp?course_id=" + course_id)
+        Request("http://learn.tsinghua.edu.cn/MultiLanguage/public/bbs/note_list_student.jsp?bbs_id=8508824&course_id=" + course_id)
         print response.text
