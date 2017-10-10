@@ -2,6 +2,10 @@
 
 ## Update Log
 
+### 2017.10.10
+
+加入scrapy爬虫登录网络学堂并爬取信息的初步框架
+
 ### 2017.10.8
 
 加入scrapy爬虫的初步示例程序
@@ -20,6 +24,7 @@ data_algorithm/graph|Learn to implement the graph structure with python|2017-10-
 mail|Learn to use SMTP server to send mails with python|2017-9-15|add simple testfile
 tcp|Learn to implement TCP client and server and communicate datas|2017-9-16|add client and server
 scrapy_project|Learn to use scrapy to spider some datas|2017-10-8|add frames
+TULearn|Learn to use scrapy to spider "learn.tsinghua.edu.cn"|2017-10-10|add frames
 ……|
 
 
