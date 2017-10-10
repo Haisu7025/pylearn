@@ -51,14 +51,19 @@ class HWSpider(scrapy.Spider):
         print problem
         print "======selector over======"
         for sel in response.xpath('//*[@id="info_1"]/tr[3]/td[1]/a'):
-            hz = re.search('href="(.*)[0-9]"', sel.extract()).group(1)
-            course_id = re.search('[0-9][0-9][0-9][0-9][0-9]', hz).group()
-            class_link = "http://learn.tsinghua.edu.cn" + hz
+            print sel.extract()
+            hzg = re.search(
+                'href="(.*)([0-9]{6})"', sel.extract())
+            hz = hzg.group(1)
+            print hz
+            course_id = hzg.group(2)
+            class_link = "http://learn.tsinghua.edu.cn" + hz + course_id
             yield Request(class_link, self.getClassDetails, meta={'course_id': course_id})
             print course_id
 
     def getClassDetails(self, response):
         course_id = response.meta['course_id']
-        Request("http://learn.tsinghua.edu.cn/MultiLanguage/public/bbs/getnoteid_student.jsp?course_id=" + course_id)
-        Request("http://learn.tsinghua.edu.cn/MultiLanguage/public/bbs/note_list_student.jsp?bbs_id=8508824&course_id=" + course_id)
+        yield Request("http://learn.tsinghua.edu.cn/MultiLanguage/lesson/student/hom_wk_brw.jsp?course_id=" + course_id, callback=self.getHomeworkInfo)
+
+    def getHomeworkInfo(self, response):
         print response.text
