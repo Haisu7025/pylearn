@@ -1,2 +1,4 @@
-tl = [[0] * 10] * 10
-print tl
+# -*- coding: utf-8 -*-
+
+str = "   你好  "
+print str.find("你")

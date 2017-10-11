@@ -22,7 +22,7 @@ def send_learn_msg(msg_list=[]):
     message['Subject'] = Header(subject, 'utf-8')
 
     try:
-        smtpObj = smtplib.SMTP('123.206.254.76')
+        smtpObj = smtplib.SMTP('127.0.0.1')
         smtpObj.sendmail(sender, receivers, message.as_string())
         print "邮件发送成功"
     except smtplib.SMTPException:

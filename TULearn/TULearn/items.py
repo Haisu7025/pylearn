@@ -14,4 +14,5 @@ class TulearnItem(scrapy.Item):
     lesson_name = scrapy.Field()  # 课程名
     homework_name = scrapy.Field()  # 作业名
     homework_time = scrapy.Field()  # 作业ddl
+    homework_state = scrapy.Field()
     pass

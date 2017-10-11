@@ -38,11 +38,7 @@ class HWSpider(scrapy.Spider):
         yield Request(lnk, self.parse)
 
     def parse(self, response):
-        print "index:"
         problem = Selector(response)
-        print problem
-        print "======selector over======"
-        print response.text
         yield Request("http://learn.tsinghua.edu.cn/MultiLanguage/lesson/student/MyCourse.jsp?language=cn", self.getClass)
 
     def getClass(self, response):
@@ -59,17 +55,17 @@ class HWSpider(scrapy.Spider):
         yield Request("http://learn.tsinghua.edu.cn/MultiLanguage/lesson/student/hom_wk_brw.jsp?course_id=" + course_id, callback=self.getHomeworkInfo)
 
     def getHomeworkInfo(self, response):
-        CourseItem = TulearnItem()
         for sel in response.xpath('//*[@id="info_1"]/tr[1]/td/text()'):
-            print "course:" + sel.extract()
-            #CourseItem['lesson_name'] = sel.extract()
-        for sel in response.xpath('//*[@id="table_box"]/tr/td[1]/a/text()'):
-            print "homework:" + sel.extract()
-            #CourseItem['homework_name'] = sel.extract()
-        for sel in response.xpath('//*[@id="table_box"]/tr/td[3]/text()'):
-            print "deadline:" + sel.extract()
-            #CourseItem['homework_time'] = sel.extract()
-        for sel in response.xpath('//*[@id="table_box"]/tr/td[4]/text()'):
-            print "issubmitted:" + sel.extract()
-            #isSubmitted = sel.extract()
-        return CourseItem
+            ln = sel.extract()
+        hn_selector_ls = response.xpath(
+            '//*[@id="table_box"]/tr/td[1]/a/text()')
+        ht_selector_ls = response.xpath('//*[@id="table_box"]/tr/td[3]/text()')
+        is_selector_ls = response.xpath('//*[@id="table_box"]/tr/td[4]/text()')
+
+        for i in range(len(hn_selector_ls)):
+            ri = TulearnItem()
+            ri['homework_name'] = hn_selector_ls[i].extract()
+            ri['homework_time'] = ht_selector_ls[i + 1].extract()
+            ri['lesson_name'] = ln
+            ri['homework_state'] = is_selector_ls[i + 1].extract()
+            yield ri
