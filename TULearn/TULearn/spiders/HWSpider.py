@@ -46,24 +46,30 @@ class HWSpider(scrapy.Spider):
         yield Request("http://learn.tsinghua.edu.cn/MultiLanguage/lesson/student/MyCourse.jsp?language=cn", self.getClass)
 
     def getClass(self, response):
-        print "classes:"
-        problem = Selector(response)
-        print problem
-        print "======selector over======"
-        for sel in response.xpath('//*[@id="info_1"]/tr[3]/td[1]/a'):
-            print sel.extract()
+        for sel in response.xpath('//*[@id="info_1"]/tr/td[1]/a'):
             hzg = re.search(
                 'href="(.*)([0-9]{6})"', sel.extract())
             hz = hzg.group(1)
-            print hz
             course_id = hzg.group(2)
             class_link = "http://learn.tsinghua.edu.cn" + hz + course_id
             yield Request(class_link, self.getClassDetails, meta={'course_id': course_id})
-            print course_id
 
     def getClassDetails(self, response):
         course_id = response.meta['course_id']
         yield Request("http://learn.tsinghua.edu.cn/MultiLanguage/lesson/student/hom_wk_brw.jsp?course_id=" + course_id, callback=self.getHomeworkInfo)
 
     def getHomeworkInfo(self, response):
-        print response.text
+        CourseItem = TulearnItem()
+        for sel in response.xpath('//*[@id="info_1"]/tr[1]/td/text()'):
+            print "course:" + sel.extract()
+            #CourseItem['lesson_name'] = sel.extract()
+        for sel in response.xpath('//*[@id="table_box"]/tr/td[1]/a/text()'):
+            print "homework:" + sel.extract()
+            #CourseItem['homework_name'] = sel.extract()
+        for sel in response.xpath('//*[@id="table_box"]/tr/td[3]/text()'):
+            print "deadline:" + sel.extract()
+            #CourseItem['homework_time'] = sel.extract()
+        for sel in response.xpath('//*[@id="table_box"]/tr/td[4]/text()'):
+            print "issubmitted:" + sel.extract()
+            #isSubmitted = sel.extract()
+        return CourseItem
