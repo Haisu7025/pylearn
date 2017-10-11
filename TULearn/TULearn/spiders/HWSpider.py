@@ -25,8 +25,8 @@ class HWSpider(scrapy.Spider):
     def post_login(self, response):
         print Selector(response)
         formdate = {
-            'userid': "yuhs15",
-            'userpass': "YyHhSs971027@",
+            'userid': "**",
+            'userpass': "**",
             'submit1': "登录"
         }
         print "login！！！！！"
