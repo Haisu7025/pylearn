@@ -1,2 +1,10 @@
 import rivercross as rc
-print rc.judge([3, 3, 0], [3, 1, 0])
+
+queue = [1, 0, 2, 5, 3]
+
+queue.append(100)
+print queue
+
+a = queue.pop()
+print a
+print queue

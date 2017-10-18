@@ -69,10 +69,10 @@ class Graph:
             if visited[i] == 0:
                 BFS(self, i)
 
-    def depth_first_search(self, func):
+    def depth_first_search(self, func=None):
         def DFS(self, i, queue):
             # TODO:operate node i
-            func()
+            print "current:", i
             pass
 
             queue.append(i)
@@ -85,8 +85,7 @@ class Graph:
 
         visited = [0] * self.nodenum
         queue = []
-        for i in range(self.nodenum):
-            DFS(self, i, queue)
+        DFS(self, 0, queue)
 
     def Dijkstra(self, x):
         # dijkstra

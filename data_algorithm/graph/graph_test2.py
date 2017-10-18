@@ -3,17 +3,12 @@
 
 import graph
 
-map = [[0, 3, 1, 10], [2, 0, 1000, 1000], [1000, 1000, 0, 3], [1000, 1, 5, 0]]
-test_graph = graph.Graph(map)
+maps = [[0, 1, 0, 1], [1, 0, 1000, 1000],
+        [1, 1000, 0, 1], [1000, 1, 1, 0]]
+test_graph = graph.Graph(maps)
+test_graph.get_edgenum()
+test_graph.get_nodenum()
 
-a = test_graph.get_nodenum()
-print a
+print test_graph.nodenum
 
-[a, b] = test_graph.Dijkstra(1)
-print a, b
-
-[a, b] = test_graph.d_find_shortest(1, 3)
-print a, b
-
-[a, b] = test_graph.Floyd()
-print a, b
+test_graph.depth_first_search()
