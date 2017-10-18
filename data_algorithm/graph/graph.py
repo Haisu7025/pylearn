@@ -53,10 +53,10 @@ class Graph:
             self.map[x][y] = 0
             self.edgenum = self.edgenum - 1
 
-    def broadth_first_search(self, func):
+    def broadth_first_search(self, func=None):
         def BFS(self, i):
             # TODO:operate node i
-            func()
+            print "current:", i
             pass
 
             visited[i] = 1
@@ -65,9 +65,7 @@ class Graph:
                     BFS(self, k)
 
         visited = [0] * self.nodenum
-        for i in range(self.nodenum):
-            if visited[i] == 0:
-                BFS(self, i)
+        BFS(self, 0)
 
     def depth_first_search(self, func=None):
         def DFS(self, i, queue):
